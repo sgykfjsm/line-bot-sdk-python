@@ -4,7 +4,10 @@ import base64
 import hashlib
 import hmac
 import json
-from urlparse import urlparse, urljoin
+try:
+    from urlparse import urlparse, urljoin
+except:
+    from urllib.parse import urlparse, urljoin
 
 from linebot import builders
 from linebot import constants
