@@ -40,8 +40,14 @@ class LineBotClient():
 
     def validate_signature(self, signature, content):
         return hmac.compare_digest(
-            str(signature),
-            base64.b64encode(hmac.new(self.credentials['X-Line-ChannelSecret'], str(content), hashlib.sha256).digest())
+            signature.encode('utf-8'),
+            base64.b64encode(
+                hmac.new(
+                    self.credentials['X-Line-ChannelSecret'].encode('utf-8'),
+                    msg=content.encode('utf-8'),
+                    digestmod=hashlib.sha256
+                ).digest()
+            )
         )
 
     @property
