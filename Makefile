@@ -5,7 +5,8 @@ setup:
 	pip install -r test_requirements.txt
 
 test:
-	python runtests.py
+	pip install -e .
+	py.test
 
 
 clean-pyc:
