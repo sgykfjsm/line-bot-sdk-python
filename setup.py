@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='linebot',
-    version='0.1',
+    version='0.2',
     packages=['linebot'],
     author = 'Satoshi SUZUKI',
     author_email = 'studio3104.com@gmail.com',

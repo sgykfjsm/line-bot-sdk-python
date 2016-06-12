@@ -4,7 +4,10 @@ import base64
 import hashlib
 import hmac
 import json
-from urlparse import urlparse, urljoin
+try:
+    from urlparse import urlparse, urljoin
+except:
+    from urllib.parse import urlparse, urljoin
 
 from linebot import builders
 from linebot import constants
@@ -37,8 +40,14 @@ class LineBotClient():
 
     def validate_signature(self, signature, content):
         return hmac.compare_digest(
-            str(signature),
-            base64.b64encode(hmac.new(self.credentials['X-Line-ChannelSecret'], str(content), hashlib.sha256).digest())
+            signature.encode('utf-8'),
+            base64.b64encode(
+                hmac.new(
+                    self.credentials['X-Line-ChannelSecret'].encode('utf-8'),
+                    msg=content.encode('utf-8'),
+                    digestmod=hashlib.sha256
+                ).digest()
+            )
         )
 
     @property
