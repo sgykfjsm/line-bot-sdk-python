@@ -6,11 +6,9 @@ python:
   - '3.4'
   - '3.5'
 install:
-- pip install -r requirements.txt
-- pip install -r test_requirements.txt
-- pip install -e .
+  - make setup
 script:
-- py.test
+  - make test
 deploy:
   provider: pypi
   user: studio3104
